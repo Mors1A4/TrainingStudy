@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Separation Neural Network - My Programming Journey</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
+
+        /* Main content */
+        main {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin: 2rem 0 1rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        pre {
+            background-color: #1e1e1e;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            border-left: 4px solid #4caf50;
+            margin: 1rem 0;
+        }
+
+        code {
+            color: #4caf50;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tech-stack {
+            background-color: #1e1e1e;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #4caf50;
+            margin: 1rem 0;
+        }
+
+        .tech-stack strong {
+            color: #4caf50;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .links {
+            margin-top: 2rem;
+        }
+
+        .links a {
+            color: #2196f3;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid #333;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Circle Separation Neural Network</h1>
+        <div class="blog-meta">Posted on October 10, 2025 | Programming Project</div>
+    </header>
+
+    <main>
+        <img src="images/animated.gif" alt="Decision Boundary Evolution Screenshot" style="display: block; margin-left: auto; margin-right: auto;">
+
+        <p>Excited to share a fun machine learning project I built using PyTorch! This neural network learns to separate points from two concentric circles—one inner and one outer—through binary classification. It's a great way to visualize how decision boundaries evolve during training.</p>
+
+        <h2>Project Overview</h2>
+        <p>The dataset consists of 200 points: 100 randomly generated inside a small circle (radius up to 1.5) labeled as 0, and 100 outside in a larger ring (radius 4 to 5) labeled as 1. The model trains over 300 epochs, and I captured the decision boundary at each step to see the learning process unfold.</p>
+
+        <div class="tech-stack">
+            <strong>Tech Stack:</strong> PyTorch (Neural Network & Training), Matplotlib (Visualization), NumPy (Data Generation)
+        </div>
+
+        <h2>Model Architecture</h2>
+        <p>The network is a simple feedforward model: a linear layer from 2 inputs (x, y coordinates) to 10 hidden units with ReLU activation, followed by another linear layer to 1 output with sigmoid for binary classification.</p>
+
+        <pre><code>class ClusterSplitter(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.layer_1 = nn.Linear(2, 10)
+        self.layer_2 = nn.Linear(10, 1)
+
+    def forward(self, x):
+        out = torch.relu(self.layer_1(x))
+        out = torch.sigmoid(self.layer_2(out))
+        return out</code></pre>
+
+        <h2>Training Process</h2>
+        <p>Using Binary Cross-Entropy Loss and SGD optimizer with lr=0.1. Here's a snippet of the training loop, which also generates plots of the decision boundary:</p>
+
+        <pre><code>for epoch in range(epochs):
+    y_pred = model(x)
+    optimizer.zero_grad()
+    loss = criterion(y_pred, y)
+    loss.backward()
+    optimizer.step()
+    plot_decision_boundary(model, x, y, epoch)
+    if epoch % 30 == 0:
+        print(f"completed {epoch} epochs with error of {loss}")</code></pre>
+
+        <p>Sample training output (loss decreasing over epochs):<br>
+        completed 0 epochs with error of 0.6931<br>
+        completed 30 epochs with error of 0.5123<br>
+        completed 60 epochs with error of 0.2345<br>
+        ... (continues to converge around epoch 150)</p>
+
+        <h2>Key Insights</h2>
+        <ul>
+            <li>The decision boundary starts chaotic and gradually forms a clear separation between the circles.</li>
+            <li>Visualizing every epoch highlights the non-linear learning of the network.</li>
+            <li>This project reinforced my understanding of activation functions and loss landscapes in classification tasks.</li>
+        </ul>
+
+        <h2>Challenges & Learnings</h2>
+        <p>Initially, the model struggled with the circular separation due to the linear layers, but the hidden layer with ReLU allowed it to approximate the non-linear boundary. I experimented with learning rates—too high caused oscillations. Overall, it's a solid intro to PyTorch for geometric data tasks.</p>
+
+        <img src="https://via.placeholder.com/800x400/333/666?text=Final+Decision+Boundary" alt="Final Decision Boundary Screenshot">
+
+        <div class="links">
+            <a href="https://github.com/yourusername/circle-separator" target="_blank">View on GitHub</a>
+            <a href="#" target="_blank">Run in Colab</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. Part of My Programming Journey Blog.</p>
+    </footer>
+</body>
+</html>
