@@ -1,12 +1,12 @@
-\# Circle Separation Neural Network
+# Circle Separation Neural Network 
 
 
 
-\*\*Posted on October 10, 2025 | Programming Project\*\*
+**Posted on October 10, 2025 | Programming Project**
 
 
 
-!\[Decision Boundary Evolution](images/animated.gif)
+![Decision Boundary Evolution](images/animated.gif)
 
 
 
@@ -14,7 +14,7 @@ Excited to share a fun machine learning project I built using PyTorch! This neur
 
 
 
-\## Project Overview
+## Project Overview
 
 
 
@@ -22,11 +22,11 @@ The dataset consists of 200 points: 100 randomly generated inside a small circle
 
 
 
-\*\*Tech Stack:\*\* PyTorch (Neural Network \& Training), Matplotlib (Visualization), NumPy (Data Generation)
+ * *Tech Stack: * * PyTorch (Neural Network  & Training), Matplotlib (Visualization), NumPy (Data Generation)
 
 
 
-\## Model Architecture
+ ## Model Architecture
 
 
 
@@ -38,29 +38,29 @@ The network is a simple feedforward model: a linear layer from 2 inputs (x, y co
 
 class ClusterSplitter(nn.Module):
 
-&nbsp;   def \_\_init\_\_(self):
+    def  _ _init _ _(self):
 
-&nbsp;       super().\_\_init\_\_()
+        super(). _ _init _ _()
 
-&nbsp;       self.layer\_1 = nn.Linear(2, 10)
+        self.layer _1 = nn.Linear(2, 10)
 
-&nbsp;       self.layer\_2 = nn.Linear(10, 1)
+        self.layer _2 = nn.Linear(10, 1)
 
 
 
-&nbsp;   def forward(self, x):
+    def forward(self, x):
 
-&nbsp;       out = torch.relu(self.layer\_1(x))
+        out = torch.relu(self.layer _1(x))
 
-&nbsp;       out = torch.sigmoid(self.layer\_2(out))
+        out = torch.sigmoid(self.layer _2(out))
 
-&nbsp;       return out
+        return out
 
 ```
 
 
 
-\## Training Process
+ ## Training Process
 
 
 
@@ -72,21 +72,21 @@ Using Binary Cross-Entropy Loss and SGD optimizer with lr=0.1. Here's a snippet 
 
 for epoch in range(epochs):
 
-&nbsp;   y\_pred = model(x)
+    y _pred = model(x)
 
-&nbsp;   optimizer.zero\_grad()
+    optimizer.zero _grad()
 
-&nbsp;   loss = criterion(y\_pred, y)
+    loss = criterion(y _pred, y)
 
-&nbsp;   loss.backward()
+    loss.backward()
 
-&nbsp;   optimizer.step()
+    optimizer.step()
 
-&nbsp;   plot\_decision\_boundary(model, x, y, epoch)
+    plot _decision _boundary(model, x, y, epoch)
 
-&nbsp;   if epoch % 30 == 0:
+    if epoch % 30 == 0:
 
-&nbsp;       print(f"completed {epoch} epochs with error of {loss}")
+        print(f"completed {epoch} epochs with error of {loss}")
 
 ```
 
@@ -108,19 +108,19 @@ completed 60 epochs with error of 0.2345
 
 
 
-\## Key Insights
+ ## Key Insights
 
 
 
-\- The decision boundary starts chaotic and gradually forms a clear separation between the circles.
+ - The decision boundary starts chaotic and gradually forms a clear separation between the circles.
 
-\- Visualizing every epoch highlights the non-linear learning of the network.
+ - Visualizing every epoch highlights the non-linear learning of the network.
 
-\- This project reinforced my understanding of activation functions and loss landscapes in classification tasks.
+ - This project reinforced my understanding of activation functions and loss landscapes in classification tasks.
 
 
 
-\## Challenges \& Learnings
+ ## Challenges  & Learnings
 
 
 
