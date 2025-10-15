@@ -24,9 +24,11 @@ The dataset consists of 200 points: 100 randomly generated inside a small circle
 
  * *Tech Stack: * * PyTorch (Neural Network  & Training), Matplotlib (Visualization), NumPy (Data Generation)
 
+## My personal understanding of why and how this model works
 
+In the diagram showing the model learning you can see that the decision boundary looks not like a smooth circle or oval but like a polygon with limited number of edges. This is because for my network I am using 10 neurons in layer 1. Each neuron learns a simple straight line which is combined using the Relu function, this function acts as a switch so that negative values are null but positive values remain the same. the Sigmoid function then is applied to the output of layer 2 which essentially scales the values to between 0 and 1. Once we have our prediction from the model we need to calculate the loss. In this example the Binary Cross-Entropy Loss function is used to determine how wrong our prediction is. This makes it so that the loss is calculated with respect to how confident the model was so penalises confidently wrong prediction much more. The loss is the used to re-tune the weights and biases via gradient descent, it first calculates the steepest gradient and takes a step in the opposite direction. the size of the step is determined by the learning rate which balances the speed and stability of the learning so that it doesn't overshoot the bottom of the valley that it is trying to reach causing it to never learn correctly. The optimizer is unable to see the entire valley and only sees the gradient of the current position so if the valley followed a winding downward path a step too large in the initial downward direction may not take it to the place we want it to be.
 
- ## Model Architecture
+ ## Model Architecture - code with torch
 
 
 
